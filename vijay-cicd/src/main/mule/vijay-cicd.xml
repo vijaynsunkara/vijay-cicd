@@ -21,8 +21,12 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 	</flow>
 	<sub-flow name="vijay-cicdSub_Flow" doc:id="79d441e2-e109-4d4f-a2a3-db9f2dc4da5b" >
 		<set-payload value="hello vijay naidu sunkara" doc:name="Set Payload" doc:id="1697e318-25be-40b5-b009-5896f225d960" />
+		<logger level="INFO" doc:name="Logger" doc:id="819b3f84-4efb-4198-af3c-a2085d3e5a6d" />
+		<set-payload value="Hello vijay welcome to india" doc:name="Set Payload" doc:id="c65f00e3-b9eb-475c-b0f4-b0c03cfdd823" />
 	</sub-flow>
 	<sub-flow name="vijay-cicdSub_Flow1" doc:id="ad35f35c-e6c3-4962-87cb-262cb8dbc61f" >
 		<set-payload value="hello bro" doc:name="Set Payload" doc:id="fe8bce27-0a40-489b-aaf0-2c5a32f87a82" />
+		<logger level="INFO" doc:name="Logger" doc:id="ca673275-e51f-4016-a438-18fd33d323e2" />
+		<set-payload value="hello others welcome to india" doc:name="Set Payload" doc:id="6dc6671e-02cf-4500-aa06-f12617ff8dc1" />
 	</sub-flow>
 </mule>
