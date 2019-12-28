@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="a2dfe130-fb2a-4319-9506-c38dac2c46d8" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="vijay-cicdFlow" doc:id="f984d550-7f9c-425c-9f2e-eebc69cbc153" >
+		<http:listener doc:id="1256b505-7b60-4068-b1c6-dbc76091073d" doc:name="" config-ref="HTTP_Listener_config" path="helloword"/>
+		<set-variable value="#[attributes.queryParams.Name]" doc:name="Set Variable" doc:id="7541a5a0-d0ce-4f22-87a3-a73cfb73401a" variableName="name"/>
+		<choice doc:name="Choice" doc:id="48001948-f768-4572-8f5f-be0c93771311" >
+			<when expression='#[vars.name=="vijay"]'>
+				<set-payload value="hello vijay" doc:name="Set Payload" doc:id="8a725421-c50e-438e-b90d-c2b79a40cb61" />
+			</when>
+			<otherwise >
+				<set-payload value="hello bro" doc:name="Set Payload" doc:id="4318ef0c-530b-4443-a6ee-2a192ff8355c" />
+			</otherwise>
+		</choice>
+	</flow>
+</mule>
