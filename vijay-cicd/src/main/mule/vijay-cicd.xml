@@ -12,11 +12,17 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 		<set-variable value="#[attributes.queryParams.Name]" doc:name="Set Variable" doc:id="7541a5a0-d0ce-4f22-87a3-a73cfb73401a" variableName="name"/>
 		<choice doc:name="Choice" doc:id="48001948-f768-4572-8f5f-be0c93771311" >
 			<when expression='#[vars.name=="vijay"]'>
-				<set-payload value="hello vijay" doc:name="Set Payload" doc:id="8a725421-c50e-438e-b90d-c2b79a40cb61" />
+				<flow-ref doc:name="Flow Reference" doc:id="1849ef7f-5509-47cd-b430-f8c638aa94de" name="vijay-cicdSub_Flow"/>
 			</when>
-			<otherwise >
-				<set-payload value="hello bro" doc:name="Set Payload" doc:id="4318ef0c-530b-4443-a6ee-2a192ff8355c" />
+			<otherwise>
+				<flow-ref doc:name="Flow Reference" doc:id="20b86f3a-2c84-4a1b-8629-84ddad741507" name="vijay-cicdSub_Flow1"/>
 			</otherwise>
 		</choice>
 	</flow>
+	<sub-flow name="vijay-cicdSub_Flow" doc:id="79d441e2-e109-4d4f-a2a3-db9f2dc4da5b" >
+		<set-payload value="hello vijay naidu sunkara" doc:name="Set Payload" doc:id="1697e318-25be-40b5-b009-5896f225d960" />
+	</sub-flow>
+	<sub-flow name="vijay-cicdSub_Flow1" doc:id="ad35f35c-e6c3-4962-87cb-262cb8dbc61f" >
+		<set-payload value="hello bro" doc:name="Set Payload" doc:id="fe8bce27-0a40-489b-aaf0-2c5a32f87a82" />
+	</sub-flow>
 </mule>
