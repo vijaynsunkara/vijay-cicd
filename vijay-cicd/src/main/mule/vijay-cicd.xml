@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
-	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
-http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
 	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="a2dfe130-fb2a-4319-9506-c38dac2c46d8" >
 		<http:listener-connection host="0.0.0.0" port="8081" />
 	</http:listener-config>
@@ -12,10 +13,28 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 		<set-variable value="#[attributes.queryParams.Name]" doc:name="Set Variable" doc:id="7541a5a0-d0ce-4f22-87a3-a73cfb73401a" variableName="name"/>
 		<choice doc:name="Choice" doc:id="48001948-f768-4572-8f5f-be0c93771311" >
 			<when expression='#[vars.name=="vijay"]'>
-				<flow-ref doc:name="Flow Reference" doc:id="1849ef7f-5509-47cd-b430-f8c638aa94de" name="vijay-cicdSub_Flow"/>
+				<scatter-gather doc:name="Scatter-Gather" doc:id="0b3df4da-add2-44e8-a512-2030729db436" >
+					<route >
+						<flow-ref doc:name="Flow Reference" doc:id="1849ef7f-5509-47cd-b430-f8c638aa94de" name="vijay-cicdSub_Flow" />
+					</route>
+					<route >
+						<flow-ref doc:name="Flow Reference" doc:id="20b86f3a-2c84-4a1b-8629-84ddad741507" name="vijay-cicdSub_Flow1" />
+					</route>
+				</scatter-gather>
+				<ee:transform doc:name="Transform Message" doc:id="c21f8afa-3146-4755-a70c-d5ca4ce24cbb">
+					<ee:message>
+						<ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+first:payload[0].payload,
+second:payload[1].payload
+}]]></ee:set-payload>
+					</ee:message>
+				</ee:transform>
 			</when>
 			<otherwise>
-				<flow-ref doc:name="Flow Reference" doc:id="20b86f3a-2c84-4a1b-8629-84ddad741507" name="vijay-cicdSub_Flow1"/>
+				<set-payload value="hello friend" doc:name="Set Payload" doc:id="7759a693-1c70-4de5-a7e2-da2cf9098469" />
 			</otherwise>
 		</choice>
 	</flow>
