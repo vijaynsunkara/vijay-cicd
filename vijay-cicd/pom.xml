@@ -29,7 +29,7 @@
 				<extensions>true</extensions>
 				<configuration>
 					<deploymentType>cloudhub</deploymentType>
-					<muleVersion>3.8.4</muleVersion>
+					<muleVersion>4.1.4</muleVersion>
 					<username>${anypoint.username}</username>
 					<password>${anypoint.password}</password>
 					<redeploy>true</redeploy>
@@ -155,8 +155,8 @@
 			<snapshots>
 			<enabled>false</enabled>
 			</snapshots>
-			</pluginRepository>
-			<pluginRepository>
+	</pluginRepository>
+	<pluginRepository>
 			<id>mule-public</id>
 			<url>https://repository.mulesoft.org/nexus/content/repositories/releases</url>
 	</pluginRepository>
