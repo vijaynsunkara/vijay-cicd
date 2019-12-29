@@ -1,3 +1,21 @@
+  
 {
-  "minMuleVersion": "4.1.4"
+  "configs": [
+    "vijay-cicd.xml"
+  ],
+  "secureProperties": [],
+  "redeploymentEnabled": true,
+  "name": "vijay-cicd",
+  "minMuleVersion": "4.1.4",
+  "requiredProduct": "MULE_EE",
+  "classLoaderModelLoaderDescriptor": {
+    "id": "mule",
+    "attributes": {
+      "exportedResources": []
+    }
+  },
+  "bundleDescriptorLoader": {
+    "id": "mule",
+    "attributes": {}
+  }
 }
