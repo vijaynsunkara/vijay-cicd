@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:file="http://www.mulesoft.org/schema/mule/file" xmlns:batch="http://www.mulesoft.org/schema/mule/batch"
+	xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/batch http://www.mulesoft.org/schema/mule/batch/current/mule-batch.xsd
+http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="e3c28b36-efa6-4c7f-a9ac-9d53e2302519" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<file:config name="File_Config" doc:name="File Config" doc:id="41676a83-4bf8-4875-bcf9-34acf59e1fe2" >
+		<file:connection workingDir="C:\Users\admin\Desktop\input" />
+	</file:config>
+	<file:config name="File_Config1" doc:name="File Config" doc:id="e5cf33b2-93d8-47dd-9c05-db0c6c122932" >
+		<file:connection workingDir="C:\Users\admin\Desktop\output" />
+	</file:config>
+	<file:config name="File_Config2" doc:name="File Config" doc:id="95b20c8b-1167-4ff2-8c43-5e2cf5e39749" >
+		<file:connection workingDir="c:\" />
+	</file:config>
+	<file:config name="File_Config3" doc:name="File Config" doc:id="e299c070-0599-4e0f-ba3c-796295dc6966" >
+		<file:connection workingDir="C:\Users\admin\Desktop\output" />
+	</file:config>
+	<http:request-config name="HTTP_Request_configuration" doc:name="HTTP Request configuration" doc:id="37850270-1efb-491e-a2ee-bcd550b0667f" >
+		<http:request-connection host="restcountries.eu"/>
+	</http:request-config>
+	<flow name="batch-processingFlow" doc:id="80b9ace6-9e25-41f6-aa71-f4325aaf26e9" >
+		<http:listener doc:name="Listener" doc:id="4938fa7c-02c2-456a-a552-c83398854b02" config-ref="HTTP_Listener_config" path="restservice"/>
+		<http:request method="GET" doc:name="Request" doc:id="7db38ea5-8da8-472d-8ad6-d0625037e0d4" config-ref="HTTP_Request_configuration" path="/rest/v2/name/{country}">
+			<http:uri-params ><![CDATA[#[output application/java
+---
+{
+	country : attributes.queryParams.name
+}]]]></http:uri-params>
+		</http:request>
+		<logger level="INFO" doc:name="Logger" doc:id="a33df949-591c-4c80-9b59-8c03b9a8ffc8" message="Done"/>
+	</flow>
+</mule>
