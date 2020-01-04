@@ -27,6 +27,33 @@
 				<configuration>
 				</configuration>
 			</plugin>
+			<plugin>
+			<groupId>org.mule.tools.maven</groupId>
+				<artifactId>mule-maven-plugin</artifactId>
+				<version>${mule.maven.plugin.version}</version>
+				<configuration> 
+        <cloudHubDeployment> 
+          <muleVersion>${app.runtime}</muleVersion> 
+          <username>vijaynaidus99</username> 
+          <password>Sunny123#</password> 
+          <environment>Sandbox</environment> 
+          <!-- <region>eu-central-1</region>  -->
+          <workerType>Micro</workerType>
+          <workers>1</workers> 
+          <uri>https://anypoint.mulesoft.com</uri>; 
+          <applicationName>vijay-cicd</applicationName> 
+        </cloudHubDeployment> 
+      </configuration> 
+      <executions> 
+        <execution> 
+          <id>deploy</id> 
+          <phase>deploy</phase> 
+          <goals> 
+            <goal>deploy</goal> 
+          </goals> 
+        </execution> 
+      </executions> 
+				</plugin>
 		</plugins>
 	</build>
 
